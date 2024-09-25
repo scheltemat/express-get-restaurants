@@ -13,12 +13,13 @@ npm start
 ```
 
 ## Part 1: `GET` Restaurants
-1. In the `app.js` file, create a `GET` request using Express for the `/restaurants` endpoint
+1. In the `app.js` file, create a `GET` request using Express for the `/restaurants` endpoint.
 2. In the `GET` request, return all restaurants via the `Restaurant.findAll()` method. 
     - Remember to use `async` and `await`
     - Note that you will need to run `npm run seed` once in order to put data into the restaurant database.
-3. Send the restaurants as a JSON Response (`res.json()`)
-4. Test your endpoint by running `node server.js` and visiting http://localhost:3000/restaurants. Your response should look similar to the one shown below:
+3. Send the restaurants as a JSON Response (`res.json()`).
+4. Start your server with `node server.js`.
+5. Test your endpoint by visiting http://localhost:3000/restaurants. Your response should look similar to the one shown below:
 
 ![image (26)](https://user-images.githubusercontent.com/44912347/202527699-972e58f4-f0ec-4dda-a3ee-e9def56cf88a.png)
 
@@ -74,7 +75,7 @@ Creating and updating values with `POST` and `PUT` requests requires that we sen
 2. Include a file (like `restaurants.js`) within the `routes` directory to represent your Express router
 3. Define your Express router to be able to handle creating, reading, updating, and deleting resources from your Restaurants database.
 4. Export your restaurants router
-5. Include a reference to your router in your main express server in `server.js`
+5. Include a reference to your router in your `app.js`
 6. Use the Express router in your main server
 7. Remove any pre-defined routes from your main server and use only your Express router.
 8. Test your endpoints using Postman
