@@ -1,6 +1,6 @@
-const Restaurant = require("./models/index")
+const { Restaurant } = require("./models/index")
 const { seedRestaurant } = require("./seedData");
-const db = require("./db/connection")
+const { db } = require("./db/connection")
 
 const syncSeed = async () => {
     await db.sync({force: true});
@@ -10,4 +10,4 @@ const syncSeed = async () => {
 
 }
 
-syncSeed()
+syncSeed();
