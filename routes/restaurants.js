@@ -1,18 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const { Restaurant } = require("../models/index");
+const { Menu } = require("../models/index");
+const { Item } = require("../models/index");
 
-router.get("/restaurants", async (req, res) => {
-  const restaurants = await Restaurant.findAll();
+router.get("/", async (req, res) => {
+  const restaurants = await Restaurant.findAll({
+    include: [{
+      model: Menu,
+      include: [{
+        model: Item
+      }]
+    }]
+  });
   res.json(restaurants);
 });
 
-router.get("/restaurants/:id", async (req, res) => {
-  const restaurant = await Restaurant.findByPk(req.params.id);
+router.get("/:id", async (req, res) => {
+  const restaurant = await Restaurant.findByPk(req.params.id, {
+    include: [{
+      model: Menu,
+      include: [{
+        model: Item
+      }]
+    }]
+  });
   res.json(restaurant);
 });
 
-router.post("/restaurants", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { name, location, cuisine } = req.body;
     const newRestaurant = await Restaurant.create({
@@ -26,7 +42,7 @@ router.post("/restaurants", async (req, res) => {
   }
 });
 
-router.put("/restaurants/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const restaurant = await Restaurant.findByPk(req.params.id);
     if (restaurant) {
@@ -40,7 +56,7 @@ router.put("/restaurants/:id", async (req, res) => {
   }
 });
 
-router.delete("/restaurants/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const restaurant = await Restaurant.findByPk(req.params.id);
     if (restaurant) {
