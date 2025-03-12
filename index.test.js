@@ -32,7 +32,7 @@ describe('/restaurants endpoint', () => {
 
   test("can add a restaurant", async () => {
     const newRestaurant = {
-      name: "Chili's",
+      name: "Rudy's Barbecue",
       location: "Everywhere",
       cuisine: "American",
     };
@@ -53,8 +53,18 @@ describe('/restaurants endpoint', () => {
     };
     const response = await request(app).post("/restaurants").send(newRestaurant);
     expect(response.body.error).toBeDefined();
-    expect(response.body.error).toHaveLength(1);
     expect(response.body.error[0].msg).toBe("Invalid value");
+  });
+
+  test("validates restaurant name length", async () => {
+    const newRestaurant = {
+      name: "Pie",
+      location: "Everywhere",
+      cuisine: "American",
+    };
+    const response = await request(app).post("/restaurants").send(newRestaurant);
+    expect(response.body.error).toBeDefined();
+    expect(response.body.error[0].msg).toBe("Name must be between 10 and 30 characters long");
   });
 
   test("can update a restaurant", async () => {
