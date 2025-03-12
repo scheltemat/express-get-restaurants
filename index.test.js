@@ -45,6 +45,18 @@ describe('/restaurants endpoint', () => {
     )).toBe(true);
   });
 
+  test("returns errors array if a field is empty", async () => {
+    const newRestaurant = {
+      name: "",
+      location: "Everywhere",
+      cuisine: "American",
+    };
+    const response = await request(app).post("/restaurants").send(newRestaurant);
+    expect(response.body.error).toBeDefined();
+    expect(response.body.error).toHaveLength(1);
+    expect(response.body.error[0].msg).toBe("Invalid value");
+  });
+
   test("can update a restaurant", async () => {
     const id = 1;
     const updatedRestaurant = {
